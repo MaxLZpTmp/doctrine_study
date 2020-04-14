@@ -19,5 +19,3 @@ $conn = array(
 );
 
 $entityManager = EntityManager::create($conn, $config);
-
-var_dump($conn);
