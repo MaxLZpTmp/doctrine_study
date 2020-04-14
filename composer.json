@@ -1,11 +1,24 @@
 {
-    "name": "maxlzp/doctrine-study",
-    "description": "Excersises with doctrine orm",
-    "authors": [
-        {
-            "name": "MaxLZp",
-            "email": "lmax_job@mail.ru"
-        }
-    ],
-    "require": {}
+  "name": "maxlzp/doctrine-study",
+  "description": "Excersises with doctrine orm",
+  "authors": [
+    {
+      "name": "MaxLZp",
+      "email": "lmax_job@mail.ru"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "maxlzp\\doctrine\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "maxlzp\\doctrine\\tests\\": "tests/"
+    }
+  },
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "^7.5"
+  }
 }
