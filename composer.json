@@ -1,0 +1,11 @@
+{
+    "name": "maxlzp/doctrine-study",
+    "description": "Excersises with doctrine orm",
+    "authors": [
+        {
+            "name": "MaxLZp",
+            "email": "lmax_job@mail.ru"
+        }
+    ],
+    "require": {}
+}
