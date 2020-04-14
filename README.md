@@ -3,14 +3,14 @@
 * [Setup](#SETUP)
 * [Create Entities](#Create-Entities)
 
-##SETUP
+## SETUP
 
-####Install/setup Doctrine
+#### Install/setup Doctrine
 ```
 composer require doctrine\orm:2.6.2
 ```
 
-####Create src/bootstrap.php:
+#### Create src/bootstrap.php:
 ```php
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
@@ -29,7 +29,7 @@ $conn = array(
 $entityManager = EntityManager::create($conn, $config);
 ```
 
-####Create src/cli-config.php:
+#### Create src/cli-config.php:
 
 ```php
 
@@ -39,7 +39,7 @@ return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($entityManager
 ```
 This file is required to run following commands (from src folder)
 
-#####Doctrine commands
+##### Doctrine commands
 ```
 vendor/bin/doctrine orm:schema-tool:drop --force
 vendor/bin/doctrine orm:schema-tool:create
