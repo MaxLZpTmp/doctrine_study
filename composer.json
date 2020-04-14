@@ -17,7 +17,9 @@
       "maxlzp\\doctrine\\tests\\": "tests/"
     }
   },
-  "require": {},
+  "require": {
+    "doctrine/orm": "^2.6.2"
+  },
   "require-dev": {
     "phpunit/phpunit": "^7.5"
   }
