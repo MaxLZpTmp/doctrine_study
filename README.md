@@ -2,6 +2,8 @@
 
 * [Setup](#SETUP)
 * [Create Entities](#Create-Entities)
+    * [Create Product mapping](#Create-Product-mapping-file)
+* [Create Product script](#Create-Product-script)
 
 ## SETUP
 
@@ -58,10 +60,43 @@ class Product
      * @var int
      */
     private $id;
+      
     /**
      * @var string
      */
     private $name;
+    
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+  
+    /**
+     * @param string $name
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
+    }
+  
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+  
+    /**
+     * @param int $id
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
 }
 ```
 
@@ -99,7 +134,8 @@ class User
 }
 ```
 
-### Create Product mapping file (mappings/maxlzp.doctrine.models.Product.dcm.xml)
+### Create Product mapping file 
+(mappings/maxlzp.doctrine.models.Product.dcm.xml)
 ```xml
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -124,3 +160,27 @@ vendor/bin/doctrine orm:schema-tool:update --force --dump-sql
 This should create database file according to mapped schema
 
 
+## Create Product script
+
+#### Create src/create_product.php
+```php
+require_once "bootstrap.php";
+  
+$newProductName = $argv[1];
+  
+$product = new Product();
+$product->setName($newProductName);
+  
+$entityManager->persist($product);
+$entityManager->flush();
+  
+echo "Created Product with ID " . $product->getId() . "\n";
+```
+
+#### Run script
+```php
+php create_product.php ORM
+php create_product.php DBAL
+```
+
+This should create two records in the database
