@@ -11,11 +11,11 @@ const DS = DIRECTORY_SEPARATOR;
 require_once ".." . DS . "vendor" . DS . "autoload.php";
 
 $isDevMode = true;
-$config = Setup::createXMLMetadataConfiguration(array(__DIR__."/config"), $isDevMode);
+$config = Setup::createXMLMetadataConfiguration(array(__DIR__."/mappings"), $isDevMode);
 
 $conn = array(
     'driver' => 'pdo_sqlite',
-    'path' => __DIR__ . DS . 'data' . DS . 'db.sqlite',
+    'path' => __DIR__ . DS . '_data' . DS . 'db.sqlite',
 );
 
 $entityManager = EntityManager::create($conn, $config);
