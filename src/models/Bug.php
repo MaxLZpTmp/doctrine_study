@@ -6,6 +6,7 @@
 
 namespace maxlzp\doctrine\models;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 class Bug

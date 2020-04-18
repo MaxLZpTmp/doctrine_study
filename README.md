@@ -9,6 +9,9 @@
 * ["Update Product" script](#Update-Product-script)
 * [Create Bug and User entities. Create mapping files](#Create-Bug-User-entities)
 * [Create entities relations](#Create-Relations)
+* ["Create User" script](#Create-User-script)
+* ["Create Bug" script](#Create-Bug-script)
+
 
 
 ## SETUP
@@ -552,4 +555,80 @@ Since reporter and engineer are on the owning side of a bi-directional relation,
 Apply changes
 ```
 vendor/bin/doctrine orm:schema-tool:update --force
+```
+
+## Create User script
+
+#### Create src\create_user.php
+
+```php
+use maxlzp\doctrine\models\User;
+  
+require_once 'bootstrap.php';
+  
+$newUsername = $argv[1];
+  
+$user = new User();
+$user->setName($newUsername);
+  
+$entityManager->persist($user);
+$entityManager->flush();
+  
+echo "Created User with id:" . $user->getId() . "\n";
+```
+#### run script
+```
+php create_user.php berbelei
+```
+
+
+## Create Bug script
+
+#### Create src/create_bug.php
+
+```php
+// create_bug.php <reporter-id> <engineer-id> <product-ids>
+// create_bug.php 1 1 1,2,3
+  
+use maxlzp\doctrine\models\Bug;
+use maxlzp\doctrine\models\Product;
+use maxlzp\doctrine\models\User;
+  
+require_once 'bootstrap.php';
+  
+$reporterId = $argv[1];
+$engineerId = $argv[2];
+$productIds = explode(',', $argv[3]);
+  
+$reporter = $entityManager->find(User::class, $reporterId);
+$engineer = $entityManager->find(User::class, $engineerId);
+  
+if (!$reporter || !$engineer) {
+    echo "No reporter and/or engineer found for the given id(s).\n";
+    exit(1);
+}
+  
+$bug = new Bug();
+$bug->setDescription("Something does not work!");
+$bug->setCreated(new \DateTime());
+$bug->setStatus("OPEN");
+  
+foreach ($productIds as $productId) {
+    $product = $entityManager->find(Product::class, $productId);
+    $bug->assignToProduct($product);
+}
+  
+$bug->setReporter($reporter);
+$bug->setEngineer($engineer);
+  
+$entityManager->persist($bug);
+$entityManager->flush();
+  
+  
+echo "Your new Bug Id: " . $bug->getId() . "\n";
+```
+
+#### execute script
+```
+php create_bug.php 1 1 1
 ```
