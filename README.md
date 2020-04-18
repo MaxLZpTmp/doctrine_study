@@ -11,6 +11,7 @@
 * [Create entities relations](#Create-Relations)
 * ["Create User" script](#Create-User-script)
 * ["Create Bug" script](#Create-Bug-script)
+* ["List of bugs" script](#Create-BugsList-script)
 
 
 
@@ -631,4 +632,39 @@ echo "Your new Bug Id: " . $bug->getId() . "\n";
 #### execute script
 ```
 php create_bug.php 1 1 1
+```
+
+## Create BigsList script
+
+#### create src/list_bugs.php
+
+```php
+
+require_once 'bootstrap.php';
+use maxlzp\doctrine\models\Bug;
+  
+$dql = "SELECT b, e, r FROM " . Bug::class . " b JOIN b.engineer e JOIN b.reporter r ORDER BY b.created DESC";
+// Next line is from doctrine GetStarted tutorial doesn't work
+// Cannot find Bug class
+//$dql = "SELECT b, e, r FROM Bug b JOIN b.engineer e JOIN b.reporter r ORDER BY b.created DESC";
+  
+$query = $entityManager->createQuery($dql);
+$query->setMaxResults(30);
+$bugs = $query->getResult();
+  
+foreach ($bugs as $bug) {
+    echo $bug->getDescription()." - ".$bug->getCreated()->format('d.m.Y')."\n";
+    echo "    Reported by: ".$bug->getReporter()->getName()."\n";
+    echo "    Assigned to: ".$bug->getEngineer()->getName()."\n";
+    foreach ($bug->getProducts() as $product) {
+        echo "    Platform: ".$product->getName()."\n";
+    }
+    echo "\n";
+}
+
+```
+
+#### run script
+```
+php list_bugs.php
 ```
