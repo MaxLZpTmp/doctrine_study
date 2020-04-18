@@ -7,15 +7,18 @@
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
-const DS = DIRECTORY_SEPARATOR;
+defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 require_once ".." . DS . "vendor" . DS . "autoload.php";
 
 $isDevMode = true;
-$config = Setup::createXMLMetadataConfiguration(array(__DIR__."/mappings"), $isDevMode);
+$pathsToXmlMapping = [
+    __DIR__ . DS . "mappings",
+];
+$config = Setup::createXMLMetadataConfiguration($pathsToXmlMapping, $isDevMode);
 
-$conn = array(
+$conn = [
     'driver' => 'pdo_sqlite',
     'path' => __DIR__ . DS . '_data' . DS . 'db.sqlite',
-);
+];
 
 $entityManager = EntityManager::create($conn, $config);

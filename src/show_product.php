@@ -9,7 +9,6 @@ require_once 'bootstrap.php';
 
 use maxlzp\doctrine\models\Product;
 
-
 $id = $argv[1];
 $product = $entityManager->find(Product::class, $id);
 

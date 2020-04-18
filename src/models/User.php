@@ -6,37 +6,56 @@
 
 namespace maxlzp\doctrine\models;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Class User
  * @package maxlzp\doctrine\models
  */
 class User
 {
-    private $banned;
-    private $username;
-    private $passwordHash;
-    private $bans;
+    /**
+     * @var int
+     */
+    protected $id;
 
+    /**
+     * @var string
+     */
+    protected $name;
 
-    public function toNickname(): string
+    protected $reportedBugs;
+
+    protected $assignedBugs;
+
+    public function __construct()
     {
-        return $this->username;
+        $this->reportedBugs = new ArrayCollection();
+        $this->assignedBugs = new ArrayCollection();
     }
 
-    public function authenticate(string $password, callable $checkHash): bool
+    public function addReportedBug(Bug $bug)
     {
-        return $checkHash($password, $this->passwordHash) && ! $this->hasActiveBans();
+        $this->reportedBugs[] = $bug;
     }
 
-    public function changePassword(string $password, callable $hash): void
+    public function assignedToBug(Bug $bug)
     {
-        $this->passwordHash = $hash($password);
+        $this->assignedBugs[] = $bug;
     }
 
-    public function ban(\DateInterval $duration): void
+    public function getId()
     {
-        assert($duration->invert !== 1);
+        return $this->id;
+    }
 
-        $this->bans[] = new Ban($this);
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 }
