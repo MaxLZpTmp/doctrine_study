@@ -3,7 +3,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="maxlzp\doctrine\models\Bug" table="bugs">
+    <entity name="maxlzp\doctrine\models\Bug" table="bugs" repository-class="maxlzp\doctrine\repositories\BugRepository">
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>
