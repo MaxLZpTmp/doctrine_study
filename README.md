@@ -12,6 +12,7 @@
 * ["Create User" script](#Create-User-script)
 * ["Create Bug" script](#Create-Bug-script)
 * ["List of bugs" script](#Create-BugsList-script)
+* ["Show bug" script](#Show-Bug-script)
 
 
 
@@ -634,7 +635,7 @@ echo "Your new Bug Id: " . $bug->getId() . "\n";
 php create_bug.php 1 1 1
 ```
 
-## Create BigsList script
+## Create BugsList script
 
 #### create src/list_bugs.php
 
@@ -667,4 +668,51 @@ foreach ($bugs as $bug) {
 #### run script
 ```
 php list_bugs.php
+```
+
+
+## Show Bug script
+
+#### create src\show_bug.php
+
+```php 
+// show_bug.php <bug-id>
+  
+use maxlzp\doctrine\models\Bug;
+  
+require_once 'bootstrap.php';
+  
+$bugId = (int)$argv[1];
+$bug = $entityManager->find(Bug::class, $bugId);
+  
+if (null == $bug) {
+    echo "Bug with id:${bugId} not found\n";
+    exit(0);
+}
+  
+echo "Bug: " . $bug->getDescription() . "\n";
+echo "Engineer: ".$bug->getEngineer()->getName()."\n";
+exit(0);
+```
+
+#### run script
+```
+php show_bug.php 1
+
+```
+
+##### Proxies configuration
+Proxy class will be generated in the Proxies folder.
+Config this folder in bootstrap.php:
+```php
+... Previous code ...
+  
+$pathToProxies = __DIR__ . DS . '_data' . DS . 'Proxies';
+$proxiesNamespace = 'maxlzp\\doctrine\\_data\\Proxies';
+  
+... Previous code ...
+  
+$config->setProxyDir($pathToProxies);
+$config->setProxyNamespace($proxiesNamespace);
+
 ```
