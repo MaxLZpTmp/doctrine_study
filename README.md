@@ -22,12 +22,12 @@
 
 ## SETUP
 
-#### Install/setup Doctrine
+Install/setup Doctrine
 ```
 composer require doctrine\orm:2.6.2
 ```
 
-#### Create src/bootstrap.php:
+Create src/bootstrap.php:
 ```php
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
@@ -46,7 +46,7 @@ $conn = array(
 $entityManager = EntityManager::create($conn, $config);
 ```
 
-#### Create src/cli-config.php:
+Create src/cli-config.php:
 
 ```php
 
@@ -56,7 +56,7 @@ return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($entityManager
 ```
 This file is required to run following commands (from src folder)
 
-##### Doctrine commands
+#### Doctrine commands
 ```
 vendor/bin/doctrine orm:schema-tool:drop --force
 vendor/bin/doctrine orm:schema-tool:create
@@ -65,7 +65,7 @@ vendor/bin/doctrine orm:schema-tool:update --force
 ```
 ## Create Entities
 
-### Create models/Product.php
+Create models/Product.php
 ```php
 namespace maxlzp\doctrine\models;
  
@@ -115,7 +115,7 @@ class Product
 }
 ```
 
-### Create models/User.php
+Create models/User.php
 ```php
 namespace maxlzp\doctrine\models;
  
@@ -149,7 +149,7 @@ class User
 }
 ```
 
-### Create Product mapping file 
+Create Product mapping file 
 (mappings/maxlzp.doctrine.models.Product.dcm.xml)
 ```xml
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
@@ -167,7 +167,7 @@ class User
 </doctrine-mapping>
 ```
 
-### Update database schema
+Update database schema
 ```
 vendor/bin/doctrine orm:schema-tool:update --force --dump-sql
 ```
@@ -177,7 +177,7 @@ This should create database file according to mapped schema
 
 ## Create Product script
 
-#### Create src/create_product.php
+Create src/create_product.php
 ```php
 require_once "bootstrap.php";
   
@@ -192,7 +192,7 @@ $entityManager->flush();
 echo "Created Product with ID " . $product->getId() . "\n";
 ```
 
-#### Run script
+Run script
 ```php
 php create_product.php ORM
 php create_product.php DBAL
@@ -201,7 +201,7 @@ php create_product.php DBAL
 This should create two records in the database
 
 
-### Update database schema
+Update database schema
 ```
 vendor/bin/doctrine orm:schema-tool:update --force --dump-sql
 ```
@@ -211,7 +211,7 @@ This should create database file according to mapped schema
 
 ## List Products script
 
-#### Create src/list_products.php
+Create src/list_products.php
 ```php
 require_once 'bootstrap.php';
   
@@ -225,7 +225,7 @@ foreach ($products as $product) {
 }
 ```
 
-#### Run script
+Run script
 ```php
 php list_products.php
 ```
@@ -233,7 +233,7 @@ php list_products.php
 
 ## Show Product script
 
-#### Create src/show_product.php
+Create src/show_product.php
 ```php
 require_once 'bootstrap.php';
 
@@ -250,7 +250,7 @@ if ($product === null) {
 echo sprintf("-%s\n", $product->getName());
 ```
 
-#### Run script
+Run script
 ```php
 php show_product.php 1
 ```
@@ -258,7 +258,7 @@ php show_product.php 1
 
 ## Update Product script
 
-#### Create src/update_product.php
+Create src/update_product.php
 ```php
 require_once 'bootstrap.php';
   
@@ -279,14 +279,14 @@ $product->setName($newName);
 $entityManager->flush();
 ```
 
-#### Run script
+Run script
 ```php
 php update_product.php 1 NewORM
 ```
 
 ## Create Bug User entities
 
-#### Create src/models/Bug.php
+Create src/models/Bug.php
 ```php
 
 namespace maxlzp\doctrine\models;
@@ -352,7 +352,7 @@ class Bug
 }
 ```
 
-#### Create Bug mapping file (src/mappings/maxlzp.doctrine.models.Bug.dcm.xml)
+Create Bug mapping file (src/mappings/maxlzp.doctrine.models.Bug.dcm.xml)
 
 ```xml
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
@@ -371,7 +371,7 @@ class Bug
     </entity>
 </doctrine-mapping>
 ```
-#### Create(or update) src/models/User.php
+Create(or update) src/models/User.php
 ```php
 namespace maxlzp\doctrine\models;
 
@@ -408,7 +408,7 @@ class User
 }
 ```
 
-#### Create Bug mapping file (src/mappings/maxlzp.doctrine.models.User.dcm.xml)
+Create Bug mapping file (src/mappings/maxlzp.doctrine.models.User.dcm.xml)
 
 ```xml
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
@@ -425,9 +425,11 @@ class User
     </entity>
 </doctrine-mapping>
 ```
+
+
 ## Create Relations
 
-#### Update Bug-class
+Update Bug-class
 ```php
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -480,7 +482,7 @@ class Bug
 
 ```
 
-#### Update User class
+Update User class
 
 ```php
 use Doctrine\Common\Collections\ArrayCollection;
@@ -510,7 +512,7 @@ class User
 
 ```
 
-#### Update Bug mapping file
+Update Bug mapping file
 ```php
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -537,7 +539,7 @@ class User
 Since reporter and engineer are on the owning side of a bi-directional relation, we also have to specify the inversed-by attribute. They have to point to the field names on the inverse side of the relationship.
 
 
-#### Update User mapping file
+Update User mapping file
 ```xml
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -565,7 +567,7 @@ vendor/bin/doctrine orm:schema-tool:update --force
 
 ## Create User script
 
-#### Create src\create_user.php
+Create src\create_user.php
 
 ```php
 use maxlzp\doctrine\models\User;
@@ -582,7 +584,7 @@ $entityManager->flush();
   
 echo "Created User with id:" . $user->getId() . "\n";
 ```
-#### run script
+Run script
 ```
 php create_user.php berbelei
 ```
@@ -590,7 +592,7 @@ php create_user.php berbelei
 
 ## Create Bug script
 
-#### Create src/create_bug.php
+Create src/create_bug.php
 
 ```php
 // create_bug.php <reporter-id> <engineer-id> <product-ids>
@@ -634,14 +636,14 @@ $entityManager->flush();
 echo "Your new Bug Id: " . $bug->getId() . "\n";
 ```
 
-#### execute script
+Run script
 ```
 php create_bug.php 1 1 1
 ```
 
 ## Create BugsList script
 
-#### create src/list_bugs.php
+Create src/list_bugs.php
 
 ```php
 
@@ -669,7 +671,7 @@ foreach ($bugs as $bug) {
 
 ```
 
-#### run script
+Run script
 ```
 php list_bugs.php
 ```
@@ -677,7 +679,7 @@ php list_bugs.php
 
 ## Show Bug script
 
-#### create src\show_bug.php
+Create src\show_bug.php
 
 ```php 
 // show_bug.php <bug-id>
@@ -699,7 +701,7 @@ echo "Engineer: ".$bug->getEngineer()->getName()."\n";
 exit(0);
 ```
 
-#### run script
+Run script
 ```
 php show_bug.php 1
 
@@ -750,7 +752,7 @@ foreach ($bugs as $bug) {
 }
 ```
 
-#### run script
+Run script
 ```
 php dashboard.php 1
 ```
