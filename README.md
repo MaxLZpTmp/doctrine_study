@@ -910,7 +910,7 @@ Update Bug mapping-file (add "repository-class" attribute).
 ```xmp
 
       ...
-     <entity name="Bug" table="bugs" repository-class="BugRepository">
+     <entity name="Bug" table="bugs" repository-class="maxlzp\doctrine\repositories\BugRepository">
 
       </entity>
       ...
