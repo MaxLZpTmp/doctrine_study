@@ -42,6 +42,10 @@ class Bug
         $this->products = new ArrayCollection();
     }
 
+    public function close()
+    {
+        $this->status = "CLOSE";
+    }
 
     public function getId()
     {

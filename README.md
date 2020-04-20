@@ -15,6 +15,7 @@
 * ["Show bug" script](#Show-Bug-script)
 * [User dashboard](#User-dashboard)
 * [Number of bugs ("products" script)](#Number-of-bugs)
+* [Updating entities](#Updating-entities)
 
 
 
@@ -757,13 +758,74 @@ php dashboard.php 1
 
 ## Number Of Bugs
 
-#### create src\products.php
+Create src\products.php
 
 ```php
 
+use maxlzp\doctrine\models\Bug;
+  
+require_once 'bootstrap.php';
+  
+$dql = "SELECT p.id, p.name, COUNT(b.id) as openBugs FROM " . Bug::class . " b "
+    . "JOIN b.products p "
+    . "WHERE b.status = 'OPEN' "
+    . "GROUP BY p.id";
+  
+$products = $entityManager
+    ->createQuery($dql)
+    ->getScalarResult();
+  
+foreach ($products as $productBug)
+{
+    echo $productBug['name'] . " has " .$productBug['openBugs'] ." bugs. \n";
+}
 ```
 
-#### run script
+Run script
 ```
 php products.php
+```
+
+
+## Updating entities
+
+Modify Bug class to be able to close the bug
+
+```php
+class Bug
+{ 
+    ...
+      
+    public function close()
+    {
+        $this->status = "CLOSE";
+    }
+}
+```
+
+Create src\close_bug.php
+
+```php
+use maxlzp\doctrine\models\Bug;
+  
+require_once 'bootstrap.php';
+  
+$bugId = (int)$argv[1];
+$bug = $entityManager->find(Bug::class, $bugId);
+if (null === $bug)
+{
+    echo "Cannot find bug to close [id: {$bugId}].\n";
+    exit(0);
+}
+  
+$bug->close();
+$entityManager->flush();
+  
+echo "Bug closed [id: {$bugId}].\n";
+
+```
+
+Run script
+```php
+php close_bug.php 1
 ```
