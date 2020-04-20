@@ -14,6 +14,7 @@
 * ["List of bugs" script](#Create-BugsList-script)
 * ["Show bug" script](#Show-Bug-script)
 * [User dashboard](#User-dashboard)
+* [Number of bugs ("products" script)](#Number-of-bugs)
 
 
 
@@ -751,4 +752,18 @@ foreach ($bugs as $bug) {
 #### run script
 ```
 php dashboard.php 1
+```
+
+
+## Number Of Bugs
+
+#### create src\products.php
+
+```php
+
+```
+
+#### run script
+```
+php products.php
 ```
