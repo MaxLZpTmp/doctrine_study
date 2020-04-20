@@ -12,7 +12,7 @@ require_once 'bootstrap.php';
 $bugId = (int)$argv[1];
 $bug = $entityManager->find(Bug::class, $bugId);
 if (null == $bug) {
-    echo "Bug with id:${bugId} not found\n";
+    echo "Bug with id:{$bugId} not found\n";
     exit(0);
 }
 
