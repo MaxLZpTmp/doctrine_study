@@ -1,0 +1,19 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="maxlzp\doctrine\models\household\Meter" table="meters">
+        <id name="id" type="string">
+        </id>
+
+        <field name="title" type="string" />
+
+        <one-to-many field="readings" target-entity="maxlzp\doctrine\models\household\MeterReading" mapped-by="meter">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+        </one-to-many>
+
+    </entity>
+</doctrine-mapping>
