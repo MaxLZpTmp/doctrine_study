@@ -15,5 +15,9 @@
                 </cascade>
         </one-to-many>
 
+        <indexes>
+            <index name="title_idx" columns="title" />
+        </indexes>
+
     </entity>
 </doctrine-mapping>
