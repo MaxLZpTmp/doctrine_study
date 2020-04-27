@@ -16,9 +16,14 @@ use Ramsey\Uuid\Uuid;
 class Meter
 {
     /**
-     * @var string
+     * @var Id
      */
     private $id;
+
+    /**
+     * @var Household
+     */
+    private $household;
 
     /**
      * @var string
@@ -34,9 +39,10 @@ class Meter
      * Meter constructor.
      * @param $title
      */
-    public function __construct($title, $id = null)
+    public function __construct($household, $title, $id = null)
     {
-        $this->id = (null === $id) ? Uuid::uuid4() : $id;
+        $this->id = Id::create($id);
+        $this->household = $household;
         $this->title = $title;
         $this->readings = new ArrayCollection();
     }
@@ -51,11 +57,19 @@ class Meter
     }
 
     /**
-     * @return string
+     * @return Id
      */
-    public function getId(): string
+    public function getId(): Id
     {
         return $this->id;
+    }
+
+    /**
+     * @return Household
+     */
+    public function getHousehold(): Household
+    {
+        return $this->household;
     }
 
     /**

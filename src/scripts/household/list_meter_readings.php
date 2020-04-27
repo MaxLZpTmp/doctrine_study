@@ -4,7 +4,7 @@
  * @link https://github.com/MaxLZp
  */
 
-require_once 'bootstrap.php';
+require_once __DIR__ . '/../../bootstrap.php';
 
 $meterId = $argv[1];
 

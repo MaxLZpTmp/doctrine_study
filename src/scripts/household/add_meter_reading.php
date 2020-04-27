@@ -4,9 +4,10 @@
  * @link https://github.com/MaxLZp
  */
 
+use maxlzp\doctrine\models\household\Id;
 use maxlzp\doctrine\models\household\Meter;
 
-require_once 'bootstrap.php';
+require_once __DIR__ . '/../../bootstrap.php';
 
 $meterId = $argv[1];
 $value = (float)$argv[2];
@@ -18,7 +19,7 @@ if (null === $meterId || null === $value)
     exit(1);
 }
 
-$meter = $entityManager->find(Meter::class, $meterId);
+$meter = $entityManager->find(Meter::class, Id::create($meterId));
 
 if (null == $meter)
 {

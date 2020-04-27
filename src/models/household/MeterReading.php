@@ -6,8 +6,6 @@
 
 namespace maxlzp\doctrine\models\household;
 
-use Ramsey\Uuid\Uuid;
-
 /**
  * Class MeterReading
  * @package maxlzp\doctrine\models\household
@@ -15,7 +13,7 @@ use Ramsey\Uuid\Uuid;
 class MeterReading
 {
     /**
-     * @var string
+     * @var Id
      */
     private $id;
 
@@ -46,16 +44,16 @@ class MeterReading
     public function __construct(Meter $meter, \DateTimeImmutable $date, $value, $id = null)
     {
         $this->guardNonNumericValue($value);
-        $this->id = (null == $id) ? Uuid::uuid4() : $id;
+        $this->id = Id::create($id);
         $this->date = $date;
         $this->value = $value;
         $this->meter = $meter;
     }
 
     /**
-     * @return string
+     * @return Id
      */
-    public function getId(): string
+    public function getId(): Id
     {
         return $this->id;
     }

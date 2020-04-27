@@ -6,6 +6,8 @@
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use Doctrine\DBAL\Types\Type;
+use maxlzp\doctrine\_data\mappings\types\UuidType;
 
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 require_once ".." . DS . 'vendor' . DS . 'autoload.php';
@@ -27,3 +29,8 @@ $conn = [
 ];
 
 $entityManager = EntityManager::create($conn, $config);
+
+Type::addType('uuidtype', UuidType::class);
+
+$conn = $entityManager->getConnection();
+$conn->getDatabasePlatform()->registerDoctrineTypeMapping('string', 'uuidtype');

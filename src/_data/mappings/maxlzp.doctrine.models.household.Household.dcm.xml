@@ -3,21 +3,17 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="maxlzp\doctrine\models\household\Meter" table="meters">
+    <entity name="maxlzp\doctrine\models\household\Household" table="households">
         <id name="id" type="uuidtype">
         </id>
 
         <field name="title" type="string" />
 
-        <one-to-many field="readings" target-entity="maxlzp\doctrine\models\household\MeterReading" mapped-by="meter">
+        <one-to-many field="meters" target-entity="maxlzp\doctrine\models\household\Meter" mapped-by="household">
                 <cascade>
                     <cascade-all/>
                 </cascade>
         </one-to-many>
-
-        <many-to-one field="household" target-entity="maxlzp\doctrine\models\household\Household">
-            <join-column name="household_id" referenced-column-name="id"/>
-        </many-to-one>
 
     </entity>
 </doctrine-mapping>
