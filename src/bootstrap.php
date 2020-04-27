@@ -30,7 +30,11 @@ $conn = [
 
 $entityManager = EntityManager::create($conn, $config);
 
+
 Type::addType('uuidtype', UuidType::class);
 
 $conn = $entityManager->getConnection();
 $conn->getDatabasePlatform()->registerDoctrineTypeMapping('string', 'uuidtype');
+$conn->getDatabasePlatform()->registerDoctrineTypeMapping('uuidtype', 'string');
+
+
