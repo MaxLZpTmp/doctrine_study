@@ -13,7 +13,7 @@ $managers = $entityManager->getRepository(Manager::class)->findAll();
 $customers = $entityManager->getRepository(Customer::class)->findAll();
 
 foreach ($managers as $manager) {
-    echo $manager->getReport() . "\n";
+    echo $manager->getOccupation() . "\t" . $manager->getReport() . "\n";
 }
 
 foreach ($customers as $customer) {

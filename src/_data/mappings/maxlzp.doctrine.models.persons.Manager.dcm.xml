@@ -4,6 +4,6 @@
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="maxlzp\doctrine\models\persons\Manager" table="persons">
-
+        <field name="occupation" type="string" />
     </entity>
 </doctrine-mapping>

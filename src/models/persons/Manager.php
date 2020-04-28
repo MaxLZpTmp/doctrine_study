@@ -10,6 +10,8 @@ namespace maxlzp\doctrine\models\persons;
 class Manager extends Person
 {
 
+    private $occupation = 'Manager';
+
     /**
      * @return string
      */
@@ -18,5 +20,13 @@ class Manager extends Person
         return $this->getName()
             . ' created a report at '
             . (new \DateTimeImmutable())->format('Y.m.d h:m:s');
+    }
+
+    /**
+     * @return string
+     */
+    public function getOccupation(): string
+    {
+        return $this->occupation;
     }
 }

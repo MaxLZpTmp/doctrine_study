@@ -1349,3 +1349,32 @@ foreach ($customers as $customer) {
     echo $customer->makeOrder() . "\n";
 }
 ```
+
+Child entities may have different fields. These fields must be mapped at corresponding mapping file.
+ 
+Manager.php 
+ ```php
+    ...
+    private $occupation = 'Manager';
+  
+    /**
+     * @return string
+     */
+    public function getOccupation(): string
+    {
+        return $this->occupation;
+    }
+    ...
+ ```
+ 
+ maxlzp.doctrine.models.persons.Manager.dcm.xml:
+ ```xml
+    ...
+    <field name="occupation" type="string" />
+    ...
+ ```
+ 
+ And apply changes with 
+ ```php
+ vendor\bin\doctrine orm:schema-tools:update --force
+ ```
