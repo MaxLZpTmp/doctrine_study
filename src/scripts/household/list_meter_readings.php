@@ -5,6 +5,7 @@
  */
 
 use maxlzp\doctrine\models\household\Id;
+use maxlzp\doctrine\models\household\MeterReading;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
@@ -28,3 +29,13 @@ foreach ($meter->getReadings() as $reading) {
     echo "Date: " . $reading->getDate()->format("Y.m.d H:i:s") . "\tValue: " . $reading->getValue() . "\n";
 }
 echo "\n";
+
+$repo = $entityManager->getRepository(MeterReading::class);
+$readings = $repo->getSomething(Id::create($meterId));
+
+$arr = [];
+
+
+
+
+
