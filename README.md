@@ -1,7 +1,7 @@
 # Doctrine study project
 [Original topic](https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/tutorials/getting-started.html#getting-started-with-doctrine)
 
-Topics(#docs/_index.md)
+[Topics](#docs/_index.md)
 
 * [Setup](#SETUP)
 * [Create Entities](#Create-Entities)
