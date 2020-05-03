@@ -28,6 +28,7 @@ class BugRepository extends EntityRepository
         $query->setMaxResults(30);
         return $query->getResult();
     }
+
     public function getRecentBugsArray($number = 30)
     {
         $dql = "SELECT b, e, r, p FROM Bug b JOIN b.engineer e ".

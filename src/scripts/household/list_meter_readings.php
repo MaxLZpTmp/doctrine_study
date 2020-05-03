@@ -4,6 +4,8 @@
  * @link https://github.com/MaxLZp
  */
 
+use maxlzp\doctrine\models\household\Id;
+
 require_once __DIR__ . '/../../bootstrap.php';
 
 $meterId = $argv[1];
@@ -14,7 +16,7 @@ if (null === $meterId) {
 }
 
 $meter = $entityManager->getRepository(\maxlzp\doctrine\models\household\Meter::class)
-    ->find($meterId);
+    ->find(Id::create($meterId));
 
 if (null === $meter) {
     echo "Cannot find meter with id: {$meterId} \n";
