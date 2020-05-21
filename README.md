@@ -24,7 +24,7 @@
 
 ## SETUP
 
-Install/setup Doctrine
+Install/setup Doctrine:
 ```
 composer require doctrine\orm:2.6.2
 ```
